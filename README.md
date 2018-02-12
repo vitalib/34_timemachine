@@ -1,5 +1,5 @@
-# Timer for Websites That Steal Your Time
-
+# Timer for Websites That Steal Your Time 
+URL to timer script: https://cdn.rawgit.com/vitalib/34_timemachine/b17dfced/index.js
 This project helps to control time was spent on sites. It requires special extension for Chrome browser.
 
 # Installing
