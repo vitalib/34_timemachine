@@ -1,5 +1,19 @@
 var TIMEOUT_IN_SECS = 3 * 60
 var TEMPLATE = '<h1><span class="js-timer-minutes">00</span>:<span class="js-timer-seconds">00</span></h1>'
+var MOTIVATION = [
+  "То, что не начато сегодня – не закончить завтра.",
+  "Пессимист видит трудность в любой возможности; оптимист – видит возможность в любой трудности.",
+  "Сделаешь дело - отдохнешь смело...",
+  "Самым значительным барьером на пути к успеху является страх перед неудачей.",
+  " Чтобы плыть против течения рыба должна быть сильной, плыть по течению может даже мёртвая рыба.",
+  "Если хотите добиться успеха, задайте себе 4 вопроса: Почему? А почему бы и нет? Почему бы и не я? Почему бы и не прямо сейчас? "
+]
+
+function getMotivationMessage(){
+  var ind = Math.floor(Math.random() * MOTIVATION.length);
+  console.log(ind);
+  return MOTIVATION[ind];
+}
 
 function padZero(number){
   return ("00" + String(number)).slice(-2);
@@ -56,7 +70,11 @@ class TimerWidget{
     // adds HTML tag to current page
     this.timerContainer = document.createElement('div')
 
-    this.timerContainer.setAttribute("style", "height: 100px;")
+    this.timerContainer.setAttribute("style",
+      "height: 100px; position: fixed; z-index:999; " +
+      "left: 40px; border: 4px solid green; border-radius: 15%; " +
+      "font-size: 20px; margin: auto");
+
     this.timerContainer.innerHTML = TEMPLATE
 
     rootTag.insertBefore(this.timerContainer, rootTag.firstChild)
@@ -81,7 +99,6 @@ class TimerWidget{
 
 
 function main(){
-
   var timer = new Timer(TIMEOUT_IN_SECS)
   var timerWiget = new TimerWidget()
   var intervalId = null
@@ -90,7 +107,13 @@ function main(){
 
   function handleIntervalTick(){
     var secsLeft = timer.calculateSecsLeft()
-    timerWiget.update(secsLeft)
+    timerWiget.update(secsLeft);
+    if (secsLeft === 0) {
+      window.alert(getMotivationMessage());
+      timer.stop();
+      timer = new Timer(30*1000);
+      timer.start();
+    }
   }
 
   function handleVisibilityChange(){
