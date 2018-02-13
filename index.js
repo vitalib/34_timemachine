@@ -1,5 +1,5 @@
-var TIMEOUT_IN_SECS = 3 * 60
-var TEMPLATE = '<h1><span class="js-timer-minutes">00</span>:<span class="js-timer-seconds">00</span></h1>'
+var TIMEOUT_IN_SECS = 3 * 60;
+var TEMPLATE = '<span class="js-timer-minutes">00</span>:<span class="js-timer-seconds">00</span>'
 var MOTIVATION = [
   "То, что не начато сегодня – не закончить завтра.",
   "Пессимист видит трудность в любой возможности; оптимист – видит возможность в любой трудности.",
@@ -71,9 +71,12 @@ class TimerWidget{
     this.timerContainer = document.createElement('div')
 
     this.timerContainer.setAttribute("style",
-      "height: 100px; position: fixed; z-index:999; " +
-      "left: 40px; border: 4px solid green; border-radius: 15%; " +
-      "font-size: 20px; margin: auto");
+      "text-align: center;" +
+      "vertical-align: middle;" +
+      "height: 40px; position: fixed; z-index:999; " +
+      "left: 40px; border: 4px solid red; border-radius: 15%; " +
+      "font-size: 30px;  font-weight: 700; opacity:0.7;" +
+      "color: red");
 
     this.timerContainer.innerHTML = TEMPLATE
 
@@ -111,7 +114,7 @@ function main(){
     if (secsLeft === 0) {
       window.alert(getMotivationMessage());
       timer.stop();
-      timer = new Timer(30*1000);
+      timer = new Timer(30);
       timer.start();
     }
   }
@@ -133,4 +136,5 @@ function main(){
 }
 
 // initialize timer when page ready for presentation
-window.addEventListener('load', main)
+//window.addEventListener('load', main)
+main()
